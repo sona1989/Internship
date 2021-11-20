@@ -379,6 +379,142 @@ Both descriptive and inferential statistics go hand in hand and one cannot exist
 
 
 
+----------------------------------
+
+Machine learning Worksheet
+
+
+Machine learning 
+
+1. A 
+
+2. A
+
+3. B
+
+4. C
+
+5. C
+
+6. B
+
+7. D
+
+8. A
+
+9. C
+
+10. B
+
+11. D
+
+12 . A B C 
+
+13 and 14. Regularization 
+
+Regularization is a technique used to reduce the errors by fitting the function appropriately on the given training set and avoid overfitting. 
+The commonly used regularization techniques are : 
+ 
+
+• L1 regularization
+
+• L2 regularization
+
+• Dropout regularization
+
+This article focus on L1 and L2 regularization. 
+
+A regression model which uses L1 Regularization technique is called LASSO(Least Absolute Shrinkage and Selection Operator) regression. 
+A regression model that uses L2 regularization technique is called Ridge regression. 
+Lasso Regression adds “absolute value of magnitude” of coefficient as penalty term to the loss function(L). 
+
+ 
+
+
+
+
+Ridge regression adds “squared magnitude” of coefficient as penalty term to the loss function(L). 
+
+ 
+
+
+
+• 
+
+
+
+NOTE that during Regularization the output function(y_hat) does not change. The change is only in the loss function. 
+
+The output function: 
+ 
+
+• 
+
+
+
+The loss function before regularization: 
+
+ 
+
+• 
+
+
+
+The loss function after regularization: 
+
+ 
+
+• 
+
+
+
+ 
+
+• 
+
+
+
+We define Loss function in Logistic Regression as : 
+ 
+
+L(y_hat,y) = y log y_hat + (1 - y)log(1 - y_hat) 
+
+Loss function with no regularization : 
+ 
+
+L = y log (wx + b) + (1 - y)log(1 - (wx + b)) 
+
+Lets say the data overfits the above function. 
+
+Loss function with L1 regularization : 
+ 
+
+L = y log (wx + b) + (1 - y)log(1 - (wx + b)) + lambda*||w||1 
+
+Loss function with L2 regularization : 
+ 
+
+L = y log (wx + b) + (1 - y)log(1 - (wx + b)) + lambda*||w||22 
+
+lambda is a Hyperparameter Known as regularization constant and it is greater than zero. 
+ 
+
+• lambda > 0
+-----------
+15. Within a linear regression model tracking a stock's price over time, the error term is the difference between the expected price at a particular time and the price that was actually observed. ... The error term stands for any influence being exerted on the price variable, such as changes in market sentiment
+
+Linear regression most often uses mean-square error (MSE) to calculate the error of the model. MSE is calculated by:
+
+• measuring the distance of the observed y-values from the predicted y-values at each value of x;
+
+• squaring each of these distances;
+
+• calculating the mean of each of the squared distances.
+
+Linear regression fits a line to the data by finding the regression coefficient that results in the smallest MSE.
+
+
+
 
 
 
