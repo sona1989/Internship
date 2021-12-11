@@ -470,3 +470,56 @@ import pandas as pd
 print(' Coreyms.com data')
 df = pd.DataFrame({'HEading':postheading,'Content':content,'Date':date1[:10],'Video':yt_link[:10]})
 df
+
+
+!pip install bs4
+!pip install requests
+from bs4 import BeautifulSoup
+import requests
+page = requests.get('https://www.nobroker.in/property/sale/bangalore/Electronic%20City?type=BHK4&searchParam=W3sibGF0IjoxMi44N%20DUyMTQ1LCJsb24iOjc3LjY2MDE2OTUsInBsYWNlSWQiOiJDaElKdy1GUWQ0cHNyanNSSGZkYXpnXzhYRW8%20iLCJwbGFjZU5hbWUiOiJFbGVjdHJvbmljIENpdHkifV0=&propertyAge=0&radius=2.0')
+page
+soup= BeautifulSoup(page.content)
+soup
+# Scrapping house heading
+
+house=[]
+for i in soup.find_all('h2',class_="heading-6 font-semi-bold nb__25Cl7"):
+    house.append(i.text)
+
+house
+#Scrapping all location
+
+loc=[]
+for i in soup.find_all('div',class_="nb__1EwQz"):
+    loc.append(i.text)
+loc
+
+#Scapping all area
+area=[]
+for i in soup.find_all('div',class_='nb__FfHqA'):
+    area.append(i.text)
+area
+emi=[]
+
+for i in soup.find_all('div',class_='font-semi-bold heading-6',id="roomType"):
+    emi.append(i.text)
+    
+emi
+cost=[]
+cost1=[]
+for i in soup.find_all('div',class_='font-semi-bold heading-6'):
+    for j in i.find_all('span'):
+          cost.append(j.text.replace('₹',''))
+for i in range(0,len(cost)):
+    if i%2!=0:
+        cost1.append(cost[i])
+    else:
+        pass
+    
+cost1
+import pandas as pd
+print(' NoBroker.in data')
+df = pd.DataFrame({'House':house,'Location':loc,'Area':area,'Emi':emi,'Cost':cost1})
+df
+
+
