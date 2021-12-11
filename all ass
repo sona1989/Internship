@@ -523,3 +523,67 @@ df = pd.DataFrame({'House':house,'Location':loc,'Area':area,'Emi':emi,'Cost':cos
 df
 
 
+!pip install bs4
+!pip install requests
+from bs4 import BeautifulSoup
+import requests
+import re
+import csv
+page = requests.get('https://www.dineout.co.in/delhi-restaurants/buffet-special')
+page
+soup= BeautifulSoup(page.content)
+soup
+# Scrapping restaurant name
+
+rname=[]
+for i in soup.find_all('a',class_="restnt-name ellipsis"):
+       rname.append(i.text)
+
+rname
+#Scrapping all restaurant location
+
+loc=[]
+for i in soup.find_all('div',class_="restnt-loc ellipsis"):
+    loc.append(i.text)
+    
+loc
+#Scapping all cuisine
+cuisine=[]
+cuisine1=[]
+for i in soup.find_all('span',class_='double-line-ellipsis'):
+          cuisine.append(i.text)  
+        
+for i in range(0,len(cuisine)):
+     cus_string = cuisine[i]
+     cus = (' '.join(cus_string.split('|')).replace('.', ''))
+     cus1 = cus[len(str(i))+21:]
+     cuisine1.append(cus1)
+cuisine1
+rating=[]
+
+for i in soup.find_all('div',class_='restnt-rating rating-4'):
+    rating.append(i.text)
+    
+rating
+img_url=[]
+for i in soup.find_all('div',class_='img cursor'):
+    try:
+       img_url= i.find('img',class_="no-img")['data-src']
+       
+    except Exception as e:
+        img_url=None
+        
+    print(img_url)    
+   
+   # csv_writer.writerow([rname, loc, rating, cuisine, img_url])
+#csv_file.close()
+   #<img class="no-img" data-src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/8/k/b/p86792-16062953735fbe1f4d3fb7e.jpg?tr=tr:n-medium" alt="Castle Barbeque" data-gatype="RestaurantImageClick" data-url="/delhi/castle-barbeque-connaught-place-central-delhi-86792" data-w-onclick="cardClickHandler" src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/8/k/b/p86792-16062953735fbe1f4d3fb7e.jpg?tr=tr:n-medium">
+#img_url
+import pandas as pd
+print(' Dineout.co.in data')
+df = pd.DataFrame({'Restaurant name':rname,'Location':loc,'Rating':rating,'Cuisine':cuisine1,'Image':img_url})
+df
+df.to_csv("./dine.csv",sep=',',index=False)
+
+
+
