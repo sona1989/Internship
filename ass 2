@@ -1,0 +1,92 @@
+#Answer-1
+
+!pip install selenium
+import selenium
+import pandas as pd
+from selenium import webdriver
+driver = webdriver.Chrome(r"C:\Users\Dell\Downloads\chromedriver_win32\chromedriver.exe")
+driver.get("https://www.naukri.com/")
+#finding element for job search
+
+job_search = driver.find_element_by_id('qsb-keyword-sugg')
+job_search.send_keys("Data Analyst")
+job_loc = driver.find_element_by_id('qsb-location-sugg')
+job_loc.send_keys("Bangalore")
+search_str=driver.find_element_by_xpath("//div[@class='search-btn']/button")
+search_str.click()
+url = "https://www.naukri.com/data-analyst-jobs-in-bangalore?k=data%20analyst&l=bangalore"
+driver.get(url)
+job_title =[]
+job_location3=[]
+company_name=[]
+experience_required=[]
+
+title1=driver.find_elements_by_xpath("//a[@class='title fw500 ellipsis']")
+for i in title1:
+    title=i.text
+    job_title.append(title)
+job_title
+comp1=driver.find_elements_by_xpath("//a[@class='subTitle ellipsis fleft']")
+
+for i in comp1:
+    comp=i.text
+    company_name.append(comp)
+company_name
+loc1=driver.find_elements_by_xpath("//li[@class='fleft grey-text br2 placeHolderLi location']/span[1]")
+for i in loc1:
+    loc=i.text
+    job_location3.append(loc)
+job_location3
+exp1=driver.find_elements_by_xpath("//li[@class='fleft grey-text br2 placeHolderLi experience']/span[1]")
+for i in exp1:
+    exp=i.text
+    experience_required.append(exp)
+experience_required
+print(' Naukri Data analyst 10 jobs ')
+df = pd.DataFrame({'Job Name':job_title[0:10],'Job Location':job_location3[0:10],'company':company_name[0:10],'Experience Req':experience_required[0:10]})
+df
+
+
+# Answer-2
+
+!pip install selenium
+import selenium
+import pandas as pd
+from selenium import webdriver
+driver = webdriver.Chrome(r"C:\Users\Dell\Downloads\chromedriver_win32\chromedriver.exe")
+driver.get("https://www.naukri.com/")
+#finding element for job search
+
+job_search = driver.find_element_by_id('qsb-keyword-sugg')
+job_search.send_keys("Data Scientist")
+job_loc = driver.find_element_by_id('qsb-location-sugg')
+job_loc.send_keys("Bangalore")
+search_str=driver.find_element_by_xpath("//div[@class='search-btn']/button")
+search_str.click()
+url = "https://www.naukri.com/data-scientist-jobs-in-bangalore?k=data%20scientist&l=bangalore"
+driver.get(url)
+job_title =[]
+job_location3=[]
+company_name=[]
+
+
+title1=driver.find_elements_by_xpath("//a[@class='title fw500 ellipsis']")
+for i in title1:
+    title=i.text
+    job_title.append(title)
+job_title
+comp1=driver.find_elements_by_xpath("//a[@class='subTitle ellipsis fleft']")
+
+for i in comp1:
+    comp=i.text
+    company_name.append(comp)
+company_name
+loc1=driver.find_elements_by_xpath("//li[@class='fleft grey-text br2 placeHolderLi location']/span[1]")
+for i in loc1:
+    loc=i.text
+    job_location3.append(loc)
+job_location3
+
+print(' Naukri Data Scientist 10 jobs ')
+df = pd.DataFrame({'Job Name':job_title[0:10],'Job Location':job_location3[0:10],'company':company_name[0:10]})
+df
